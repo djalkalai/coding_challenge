@@ -1,0 +1,4 @@
+<h1 Tweets for the following person #{23 + 2}<h1>
+<% @tweets.each do |tweet| %>
+  <%=simple_format(tweet.text + "\n")  %>
+<% end %>
