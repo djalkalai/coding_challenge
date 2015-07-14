@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     end
 
     @user_handle = access_token.params[:screen_name]
-    @handle = params[:handle] || "StephenAtHome"
+    @handle = params[:handle] || @user_handle
     @count = params[:count] || 25
     @tweets = app_client.user_timeline(@handle, count: @count)
 
