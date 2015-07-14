@@ -1,11 +1,19 @@
 <h1>Your Twitter Handle : <%= @user_handle %></h1>
 ----------------
 <p>Showing <%= @count %> tweets for handle : <%= @handle %><p>
-<p>To change the handle or count, modify the url parameters accordingly<p>
 ----------------
 <p><%= link_to "Logout", {:action => 'logout' }%></p>
 ----------------
-
+<%= form_tag("/show", method: "get") do %>
+  <%= label_tag(:handle, "Handle:") %>
+  <br>
+  <%= text_field_tag(:handle, @handle) %>
+  <br><br>
+  <%= label_tag(:count, "Count:") %>
+  <br>
+  <%= text_field_tag(:count, @count) %>
+  <%= submit_tag("Get Tweets") %>
+<% end %>
 <% @tweets.each_with_index do |tweet, i| %>
   <%=simple_format("#{i+1}. asfdsfad" + tweet.text + "\n")  %>
 <% end %>

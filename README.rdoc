@@ -6,7 +6,7 @@ https://daniel-stack-commerce.herokuapp.com
 
 When you go to the app, you will first be prompted to log in with a Twitter account. This is using the OAuth protocol to get an access token that can be used to take actions on behalf of the user. For now the only information that is used from the access token is the logged in user's twitter handle.
 
-Once an access token is received, the user is redirected back to the app where they will see the page showing tweets for a given handle, which is defaulted to 25 tweets for the user's own handle. The user is able to change the count and handle for the tweets being displayed by changing the count and handle paramters in the url and refreshing the page. 
+Once an access token is received, the user is redirected back to the app where they will see the page showing tweets for a given handle, which is defaulted to 25 tweets for the user's own handle. The user is able to change the count and handle for the tweets being displayed by changing the count and handle text fields and clicking the 'Get Tweets' button. 
 
 == App Design
 
