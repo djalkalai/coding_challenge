@@ -1,3 +1,14 @@
+<h1>Your Twitter Handle : <%= @user_handle %></h1>
+----------------
+<%= simple_format("\n") %>
+Showing <%= @count %> tweets for handle : <%= @handle %>
+<%= simple_format("\n") %>
+----------------
+<%= simple_format("\n") %>
+To change the handle or count, modify the url parameters accordingly
+<%= simple_format("\n") %>
+----------------
+
 <% @tweets.each do |tweet| %>
   <%=simple_format(tweet.text + "\n")  %>
 <% end %>

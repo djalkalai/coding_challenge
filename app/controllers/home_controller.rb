@@ -29,9 +29,14 @@ class HomeController < ApplicationController
       session[:access_token] = access_token
     end
 
+    @user_handle = access_token.params[:screen_name]
     @handle = params[:handle] || "StephenAtHome"
-    count = params[:count] || 25
-    @tweets = app_client.user_timeline(@handle, count: count)
+    @count = params[:count] || 25
+    @tweets = app_client.user_timeline(@handle, count: @count)
+
+    if params.include? 'oauth_token'
+      return redirect_to "/show?handle=#{@handle}&count=#{@count}"
+    end
   end
 
   protected
