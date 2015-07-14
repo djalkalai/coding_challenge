@@ -1,14 +1,11 @@
 <h1>Your Twitter Handle : <%= @user_handle %></h1>
 ----------------
-<%= simple_format("\n") %>
-Showing <%= @count %> tweets for handle : <%= @handle %>
-<%= simple_format("\n") %>
+<p>Showing <%= @count %> tweets for handle : <%= @handle %><p>
+<p>To change the handle or count, modify the url parameters accordingly<p>
 ----------------
-<%= simple_format("\n") %>
-To change the handle or count, modify the url parameters accordingly
-<%= simple_format("\n") %>
+<p><%= link_to "Logout", {:action => 'logout' }%></p>
 ----------------
 
-<% @tweets.each do |tweet| %>
-  <%=simple_format(tweet.text + "\n")  %>
+<% @tweets.each_with_index do |tweet, i| %>
+  <%=simple_format("#{i+1}. asfdsfad" + tweet.text + "\n")  %>
 <% end %>

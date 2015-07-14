@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+
+  DEFAULT_COUNT = 25
+
   def index
     client = TwitterOAuth::Client.new(
     :consumer_key => '2gUE1WXvP7Kq1GjlrptmuA7vv',
@@ -13,8 +16,19 @@ class HomeController < ApplicationController
     redirect_to request_token.authorize_url
   end
 
+  def start
+  end
+
+  def logout
+    session[:client] = nil if session[:client]
+    session[:request_token] = nil if session[:request_token]
+    session[:access_token] = nil if session[:access_token]
+
+    redirect_to '/start'
+  end
+
   def show
-    return redirect_to '/index' unless authenticated?
+    return redirect_to '/start' unless authenticated?
 
     client = session[:client]
     request_token = session[:request_token]
@@ -31,7 +45,7 @@ class HomeController < ApplicationController
 
     @user_handle = access_token.params[:screen_name]
     @handle = params[:handle] || @user_handle
-    @count = params[:count] || 25
+    @count = params[:count] || DEFAULT_COUNT
     @tweets = app_client.user_timeline(@handle, count: @count)
 
     if params.include? 'oauth_token'
@@ -55,7 +69,6 @@ class HomeController < ApplicationController
   end
 
   def oauth_confirm_url
-    # "http://127.0.0.1:3000/show"
     "https://daniel-stack-commerce.herokuapp.com/show"
   end
 end
