@@ -15,5 +15,5 @@
   <%= submit_tag("Get Tweets") %>
 <% end %>
 <% @tweets.each_with_index do |tweet, i| %>
-  <%=simple_format("#{i+1}. asfdsfad" + tweet.text + "\n")  %>
+  <%=simple_format("#{i+1}. " + tweet.text + "\n")  %>
 <% end %>
