@@ -69,7 +69,6 @@ class HomeController < ApplicationController
   end
 
   def oauth_confirm_url
-    "http://127.0.0.1:3000/show"
-    # "https://daniel-stack-commerce.herokuapp.com/show"
+    "https://daniel-stack-commerce.herokuapp.com/show"
   end
 end
