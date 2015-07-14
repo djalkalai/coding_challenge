@@ -4,12 +4,23 @@ The app is deployed on heroku and located at the following url:
 
 https://daniel-stack-commerce.herokuapp.com
 
-When you go to the app, you will first be redirected to the Twitter sign in page. This is using the OAuth protocol to get an access token that can be used to take actions on behalf of the user. For now the only information that is used from the access token is the logged in user's twitter handle.
+When you go to the app, you will first be prompted to log in with a Twitter account. This is using the OAuth protocol to get an access token that can be used to take actions on behalf of the user. For now the only information that is used from the access token is the logged in user's twitter handle.
 
 Once an access token is received, the user is redirected back to the app where they will see the page showing tweets for a given handle, which is defaulted to 25 tweets for the user's own handle. The user is able to change the count and handle for the tweets being displayed by changing the count and handle paramters in the url and refreshing the page. 
 
 == App Design
 
-The app has a home_controller with two methods. The index method is the root for the site, and is used to initiate the OAuth protocol with the Twitter endpoint. Once the user authenticates successfully, they are redirected to the show controller action, which uses the access_token returned by the OAuth protocol to get the logged in user's handle.
+The app has a very bare bones design, with only two pages, one for logging in and one for displaying the tweets. Whether the user is logged in is tracked by storing the client oauth object in the session. Logging out is done by clearing the session. This design is very simple but adequate in this case because we have no need to store any user data of our own.
 
-The show action uses the handle and count parameters to get a certain number of tweets. App level authentication is done to access the API necessary to get the tweets. Since the API is publicly available the user's access token is not necessary.
+Once the user authenticates successfully, they are redirected to the show controller action, which uses the access_token returned by the OAuth protocol to get the logged in user's handle.
+
+The show action uses the handle and count parameters to get a certain number of tweets using the Twitter API. App level authentication is done to access the API necessary to get the tweets. Since the API is publicly available the user's access token is not necessary.
+
+== Local Environment Setup
+
+This app uses ruby version 2.0.0, so if rvm has the ruby version set appropriately then simply cloning and bundling the repo should be enough to begin development. 
+
+When running the app locally using rails s, it helps to change the protected method 'home_controller#oauth_confirm_url' to output "http://127.0.0.1:3000/show", that way Twitter redirects back to the local app after authentication (need to also change the registered callback url). Really environment variables should be used to manage this testing without having to change code.
+
+Once all code is pushed, deploy to heroku using : 
+git push heroku master
